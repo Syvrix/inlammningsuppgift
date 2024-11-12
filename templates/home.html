@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <style>
+    <!-- Task CSS formating !-->
+
+        .column {
+          float: left;
+          width: 50%;
+          padding: 10px;
+          height: 300px; /* Should be removed. Only for demonstration */
+        }
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="Add task">
+        <h1>Add task</h1>
+        <form action="/tasks" method="POST">
+            <label for="id">id</label>
+            <input type="text" id="id" name="id">
+
+            <label for="description">description</label>
+            <input type="text" id="description" name="description">
+
+            <label for="category">category</label>
+            <input type="text" id="category" name="category">
+
+            <label for="status">status</label>
+            <input type="text" id="status" name="status">
+            <button type="submit">Submit</button>
+        </form>
+        {% if show_error %}
+        <p>Error: The task ID already exists</p>
+        {% endif %}
+    </div>
+        <!-- ### Task section STARTS ### !-->
+        <div class="Tasks">
+            <h1>Tasks</h1>
+            <ul>
+                {% for task in tasks %}
+                <li>
+                        <span class="column"> ID: {{ task['id'] }}</span>
+                        <span class="column"> Description: {{ task['description'] }}</span>
+                        <span class="column"> Category: {{ task['category'] }}</span>
+                        <span class="column"> Status: {{ task['status'] }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- ### Task section ENDS ###  !-->
+
+</body>
+</html>
