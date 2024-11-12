@@ -21,29 +21,49 @@
     </style>
 </head>
 <body>
-    <div class="Add task">
-        <h1>Add task</h1>
-        <form action="/tasks" method="POST">
-            <label for="id">id</label>
-            <input type="text" id="id" name="id">
+    <h1>Tasks</h1>
+    <h3>Status Message</h3>
+        <p id="Statusmessage">{{show_error_message}}</p>
 
-            <label for="description">description</label>
-            <input type="text" id="description" name="description">
+    <div class="Task Management">
+        <div class="Add Task">
+            <h4>Add Task</h4>
+            <form action="/tasks" method="POST">
+                <label for="id">id</label>
+                <input type="text" id="id" name="id">
 
-            <label for="category">category</label>
-            <input type="text" id="category" name="category">
+                <label for="description">description</label>
+                <input type="text" id="description" name="description">
 
-            <label for="status">status</label>
-            <input type="text" id="status" name="status">
-            <button type="submit">Submit</button>
-        </form>
-        {% if show_error %}
-        <p>Error: The task ID already exists</p>
-        {% endif %}
+                <label for="category">category</label>
+                <input type="text" id="category" name="category">
+
+                <!--
+                <label for="status">status</label>
+                <input type="text" id="status" name="status">
+                -->
+
+                <button type="submit">Submit</button>
+
+            </form>
+        </div>
+        <div class="Update task">
+            <h3>Update a task</h3>
+        </div>
+
+        <div class="complete task">
+            <h3>Complete a task</h3>
+            <form action="/tasks/{{task_id}}/complete" method="PUT">
+                <label for="id_Complete">id</label>
+                <input type="text" id="id_Complete" name="id">
+                <button type="submit">Complete Task</button>
+
+            </form>
+        </div>
     </div>
         <!-- ### Task section STARTS ### !-->
-        <div class="Tasks">
-            <h1>Tasks</h1>
+        <div class="All Tasks">
+            <h2>Tasks</h2>
             <ul>
                 {% for task in tasks %}
                 <li>
