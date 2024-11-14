@@ -67,13 +67,25 @@
             <ul>
                 {% for task in tasks %}
                 <li>
-                        <span class="column"> ID: {{ task['id'] }}</span>
-                        <span class="column"> Description: {{ task['description'] }}</span>
-                        <span class="column"> Category: {{ task['category'] }}</span>
-                        <span class="column"> Status: {{ task['status'] }}</span>
+                        <span class="column"> ID: '{{ task['id'] }}'</span>
+                        <span class="column"> Description: '{{ task['description'] }}'</span>
+                        <span class="column"> Category: '{{ task['category'] }}'</span>
+                        <span class="column"> Status: '{{ task['status'] }}'</span>
                 </li>
                 {% endfor %}
             </ul>
+        </div>
+        <div class="categories">
+            <h2>Categories</h2>
+            <ul>
+                {% for category in     %}
+                <li>
+                        <span class="column"> Category: '{{ task['category'] }}'</span>
+                </li>
+                <span class="column"></span>
+                {% endfor %}
+            </ul>
+
         </div>
         <!-- ### Task section ENDS ###  !-->
 

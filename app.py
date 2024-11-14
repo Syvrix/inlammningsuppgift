@@ -1,5 +1,4 @@
 import json
-from textwrap import indent
 
 from flask import Flask, render_template, request
 
@@ -19,6 +18,18 @@ def loadtasks(mode):
 def html_message_status(message):
     return render_template("home.html", title="Todo Website", tasks=loadtasks('r'), show_error=True,
                            show_error_message=message)
+
+def categories():
+    data=loadtasks('r')
+    all_categories=[]
+    for task in data:
+        if task["category"] not in all_categories:
+            all_categories.append(task["category"])
+    if all_categories.count==0:
+        return None
+    else:
+        return all_categories
+
 
     # Using file hashing to see if file has been modified for memory efficiency. However, it needs to read the file content so it made the whole thing take longer. Keeping incase it would ever become usuable.
     # if not data_tasks:
@@ -47,7 +58,7 @@ def exists_id(id, list):
 
 @app.route('/')
 def home():
-    return render_template("home.html", title="Todo Website", tasks=loadtasks('r'), show_error=False)
+    return render_template("home.html", title="Todo Website",tasks=loadtasks('r'), show_error=False)
 
 def hometask(task):
     return render_template("home.html", title="Todo Website", tasks=task, show_error=False)
@@ -57,10 +68,12 @@ def hometask(task):
 def tasks():
     loaded_tasks = loadtasks('r')
     if request.method=='GET':
-        return home()
+        return loaded_tasks
+        #return home()
     if request.method=='POST':
         if exists_id(int(request.form["id"]), loaded_tasks):
-            return render_template("home.html", title="Todo Website", tasks=loadtasks('r'), show_error=True, show_error_message=f"The task ID already exists: {int(request.form["id"])}")
+            return "Error"
+            #return render_template("home.html", title="Todo Website", tasks=loadtasks('r'), show_error=True, show_error_message=f"The task ID already exists: {int(request.form["id"])}")
         else:
             loaded_tasks.append({
                 "id": int(request.form["id"]),
@@ -82,7 +95,8 @@ def taskid(task_id):
     if request.method=='GET':
         for task in loaded_tasks:
             if task["id"]==task_id:
-                return render_template("home.html", title="Todo Website", tasks=[task], show_error=False)
+                return task
+                #return render_template("home.html", title="Todo Website", tasks=[task], show_error=False)
                 #return task
                 #return hometask(task)
         return html_message_status(f"the provided id does not exists: {task_id}")
@@ -102,19 +116,21 @@ def taskid(task_id):
 
 # PUT /tasks/{task_id} Uppdaterar en task med ett specifikt id.
     if request.method=='PUT':
+        data = request.get_json()
+        if data is None:
+            return "The body request has to be sent as json", 404
         for task in loaded_tasks:
             if task["id"]==task_id:
                 modifiedid = False
-                if request.form["id"]:
+                if "id" in data:
                     modifiedid=True
-                    task["id"]=int(request.form["id"])
-                if request.form["description"]:
-                    task["description"]=request.form["description"]
-                if request.form["category"]:
-                    task["category"]=request.form["category"]
-                if request.form["status"]:
-                    task["status"]=request.form["status"]
-                loaded_tasks.append(task)
+                    task["id"]=int(data["id"])
+                if "description" in data:
+                    task["description"]=data["description"]
+                if "category" in data:
+                    task["category"]=data["category"]
+                if "status" in data:
+                    task["status"]=data["status"]
                 with open("tasks.json", 'w') as jfile:
                     json.dump(loaded_tasks, jfile, indent=4)
                 if modifiedid: # If ID was updated, send message to user what the new id is.
@@ -134,3 +150,7 @@ def complete_task(task_id):
                 json.dump(loaded_tasks,jfile,indent=4)
             return html_message_status(f"The task id: {task_id} has been set to completed")
     return html_message_status(f"No task with id: {task_id} could be found")
+
+@app.route('/tasks/categories/', methods=["GET"])
+def categories():
+    return home()
