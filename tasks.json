@@ -21,7 +21,7 @@
         "id": 4,
         "description": "buy pc",
         "category": "computer",
-        "status": "pending"
+        "status": "complete"
     },
     {
         "id": 5,
@@ -33,6 +33,18 @@
         "id": 6,
         "description": "dssas",
         "category": "asdsda",
+        "status": "complete"
+    },
+    {
+        "id": 7,
+        "description": "43234234",
+        "category": "computer",
+        "status": "complete"
+    },
+    {
+        "id": 8,
+        "description": "ff",
+        "category": "computer",
         "status": "pending"
     }
 ]

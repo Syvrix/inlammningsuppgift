@@ -47,6 +47,7 @@
 
             </form>
         </div>
+                <!-- #
         <div class="Update task">
             <h3>Update a task</h3>
         </div>
@@ -59,7 +60,7 @@
                 <button type="submit">Complete Task</button>
 
             </form>
-        </div>
+        </div> -->
     </div>
         <!-- ### Task section STARTS ### !-->
         <div class="All Tasks">
@@ -78,9 +79,9 @@
         <div class="categories">
             <h2>Categories</h2>
             <ul>
-                {% for category in     %}
+                {% for category in categories %}
                 <li>
-                        <span class="column"> Category: '{{ task['category'] }}'</span>
+                        <span class="column"> Category: '{{ category }}'</span>
                 </li>
                 <span class="column"></span>
                 {% endfor %}
