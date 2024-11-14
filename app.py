@@ -30,7 +30,7 @@ def categories():
     else:
         return all_categories
 
-
+    #
     # Using file hashing to see if file has been modified for memory efficiency. However, it needs to read the file content so it made the whole thing take longer. Keeping incase it would ever become usuable.
     # if not data_tasks:
     #     with open("tasks.json", 'rb') as file:
