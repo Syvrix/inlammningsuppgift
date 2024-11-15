@@ -12,39 +12,39 @@
         "status": "pending"
     },
     {
-        "id": 3,
-        "description": "buy pc",
-        "category": "computer",
-        "status": "completed"
-    },
-    {
         "id": 4,
         "description": "buy pc",
-        "category": "computer",
+        "category": "Computer",
         "status": "complete"
     },
     {
         "id": 5,
         "description": "modified",
-        "category": "fsdfds",
+        "category": "Fsdfds",
         "status": "not completed"
     },
     {
         "id": 6,
         "description": "dssas",
-        "category": "asdsda",
+        "category": "Asdsda",
         "status": "complete"
     },
     {
         "id": 7,
         "description": "43234234",
-        "category": "computer",
+        "category": "Computer",
         "status": "complete"
     },
     {
         "id": 8,
         "description": "ff",
-        "category": "computer",
+        "category": "Computer",
+        "status": "pending"
+    },
+    {
+        "id": 9,
+        "description": "Buy tv on blackmarket",
+        "category": "Black Market Sale",
         "status": "pending"
     }
 ]
